@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from "motion/react"
-import KagamiLogo from './images/Kagami.svg' // Adjust the path as necessary
+import Kagami from './components/Kagami.svg'
 
 function App() {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -35,7 +35,7 @@ function App() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1, duration: 0.5, ease: "easeInOut" }}
       >
-        <img src={KagamiLogo} alt="Kagami Logo" className="w-full h-full" style={{ color: animationComplete ? '#f97316' : 'black' }} />
+        <img src={Kagami} alt="Kagami" className="w-full h-full" style={{ filter: animationComplete ? 'invert(50%) sepia(100%) saturate(500%) hue-rotate(330deg)' : 'none' }} />
       </motion.div>
     </div>
   )
