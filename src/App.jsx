@@ -15,8 +15,8 @@ function App() {
       <motion.div
         className={`relative w-6 h-6 rounded-full cursor-pointer group ${isExpanded ? 'pointer-events-none' : ''}`}
         style={{ 
-          background: animationComplete ? 'black' : 'radial-gradient(circle, #fbbf24, #f97316)',
-          border: animationComplete ? '1px solid #f97316' : 'none'
+          background: 'radial-gradient(circle, #fbbf24, #f97316)',
+          border: 'none'
         }} 
         initial={{ scale: 1 }}
         animate={isExpanded ? { scale: [1, 20, 25] } : {}}
@@ -40,12 +40,12 @@ function App() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3, duration: 0.5, ease: "easeInOut" }}
       >
-        <img src={Kagami} alt="Kagami" className="w-full h-full" style={{ filter: animationComplete ? 'invert(50%) sepia(100%) saturate(500%) hue-rotate(330deg)' : 'none' }} />
+        <img src={Kagami} alt="Kagami" className="w-full h-full" />
         {animationComplete && (
           <motion.div
             className="text-2xl font-bold mt-4"
-            initial={{ opacity: 0, color: 'black' }}
-            animate={{ opacity: 1, color: '#f97316' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut" }}
           >
             Coming Soon...
