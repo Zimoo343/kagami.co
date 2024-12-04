@@ -11,7 +11,7 @@ function App() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-black">
+    <div className="relative flex flex-col justify-center items-center h-screen bg-black">
       <motion.div
         className={`relative w-6 h-6 rounded-full cursor-pointer group ${isExpanded ? 'pointer-events-none' : ''}`}
         style={{ 
@@ -20,7 +20,7 @@ function App() {
         }} 
         initial={{ scale: 1 }}
         animate={isExpanded ? { scale: [1, 20, 25] } : {}}
-        transition={{ duration: 4, ease: "easeInOut" }}
+        transition={{ duration: 2, ease: "easeInOut" }}
         onClick={() => {
           if (!isExpanded) {
             setIsExpanded(true)
@@ -52,6 +52,11 @@ function App() {
           </motion.div>
         )}
       </motion.div>
+
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-50"></div>
+        <div className="absolute inset-0 bg-noise opacity-5 animate-grain"></div>
+      </div>
     </div>
   )
 }
