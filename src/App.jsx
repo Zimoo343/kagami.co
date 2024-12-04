@@ -1,10 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from "motion/react"
 import Kagami from './components/Kagami.svg'
 
 function App() {
   const [isExpanded, setIsExpanded] = useState(false)
   const [animationComplete, setAnimationComplete] = useState(false)
+  const backgroundAudioRef = useRef(null)
+  const triggerAudioRef = useRef(null)
+
+  useEffect(() => {
+    if (backgroundAudioRef.current) {
+      backgroundAudioRef.current.volume = 0.2
+      backgroundAudioRef.current.play()
+    }
+
+
+    const timer = setTimeout(() => {
+      setIsExpanded(true)
+      setAnimationComplete(false)
+      if (triggerAudioRef.current) {
+        triggerAudioRef.current.play()
+      }
+    }, 7777) 
+
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleAnimationComplete = () => {
     setAnimationComplete(true)
@@ -12,6 +32,9 @@ function App() {
 
   return (
     <div className="relative flex flex-col justify-center items-center h-screen bg-black">
+      <audio ref={backgroundAudioRef} src="/src/audio/background-audio.wav" loop />
+      <audio ref={triggerAudioRef} src="/src/audio/audio-trigger.wav" />
+      
       <motion.div
         className={`relative w-6 h-6 rounded-full cursor-pointer group ${isExpanded ? 'pointer-events-none' : ''}`}
         style={{ 
@@ -20,13 +43,7 @@ function App() {
         }} 
         initial={{ scale: 1 }}
         animate={isExpanded ? { scale: [1, 20, 25] } : {}}
-        transition={{ duration: 2, ease: "easeInOut" }}
-        onClick={() => {
-          if (!isExpanded) {
-            setIsExpanded(true)
-            setAnimationComplete(false)
-          }
-        }}
+        transition={{ duration: 4, ease: "easeInOut" }}
         onAnimationComplete={handleAnimationComplete}
       >
         <div
